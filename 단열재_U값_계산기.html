@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>단열재 U값 계산기</title>
+</head>
+<body>
+  <h2>단열재 U값 계산기</h2>
+  <label for="material">단열재 종류:</label>
+  <select id="material">
+    <option value="0.032">XPS (0.032 W/m·K)</option>
+    <option value="0.038">암면 (0.038 W/m·K)</option>
+    <option value="0.035">EPS (0.035 W/m·K)</option>
+    <option value="0.024">우레탄폼 (0.024 W/m·K)</option>
+    <option value="0.040">글라스울 (0.040 W/m·K)</option>
+    <option value="0.013">에어로젤 (0.013 W/m·K)</option>
+    <option value="0.005">진공단열재 (0.005 W/m·K)</option>
+  </select><br><br>
+
+  <label for="thickness">두께 (mm):</label>
+  <input type="number" id="thickness" value="50"><br><br>
+
+  <button onclick="calculateUValue()">계산하기</button>
+
+  <h3 id="result"></h3>
+
+  <script>
+    function calculateUValue() {
+      const lambda = parseFloat(document.getElementById('material').value);
+      const thicknessMm = parseFloat(document.getElementById('thickness').value);
+      const thicknessM = thicknessMm / 1000;
+
+      const rValue = thicknessM / lambda;
+      const uValue = 1 / rValue;
+
+      document.getElementById('result').innerHTML =
+        `▶ R값: ${rValue.toFixed(2)} ㎡·K/W<br>▶ U값: ${uValue.toFixed(2)} W/㎡·K`;
+    }
+  </script>
+</body>
+</html>
